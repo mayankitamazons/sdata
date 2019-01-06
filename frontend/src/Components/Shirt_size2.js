@@ -7,7 +7,8 @@ class shirt_size2 extends React.Component
         super(props);
     
         this.state = {
-            shirt_sizes: props.getStore().shirt_sizes_2
+            shirt_sizes: props.getStore().shirt_sizes_2,
+			size_data_2:'',
         };
 
         this._validateOnDemand = true; // this flag enables onBlur validation as user fills forms
@@ -16,8 +17,9 @@ class shirt_size2 extends React.Component
         this.isValidated = this.isValidated.bind(this);
     }
 
-    handleCheck(index) {
+    handleCheck(index,value) {
         this.state.shirt_sizes[index].checked = !this.state.shirt_sizes[index].checked;
+        this.state.size_data_2 =value;
     }
 
     isValidated() {
@@ -30,8 +32,8 @@ class shirt_size2 extends React.Component
             }   
         }
 
-        const userInput = {shirt_sizes_2: this.state.shirt_sizes};
-
+        const userInput = {shirt_sizes_2: this.state.shirt_sizes,size_data_2:this.state.size_data_2};
+       console.log(userInput);
         this.props.updateStore({
             ...userInput,
             savedToCloud: false // use this to notify step4 that some changes took place and prompt the user to save again
@@ -89,112 +91,112 @@ class shirt_size2 extends React.Component
                     </tr>
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 0)} defaultChecked={this.state.shirt_sizes[0].checked}/><font size="3">  Youth Small-Tennessee Orange </font>
+                <input type="radio" onChange={this.handleCheck.bind(this, 0,'Youth Small-Tennessee Orange')} defaultChecked={this.state.shirt_sizes[0].checked}/><font size="3">  Youth Small-Tennessee Orange </font>
                 </td>
 
                 </tr>
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 1)} defaultChecked={this.state.shirt_sizes[1].checked}/><font size="3"> Youth Small-Super Blue </font>
+                <input type="radio" onChange={this.handleCheck.bind(this, 1,'Youth Small-Super Blue')} defaultChecked={this.state.shirt_sizes[1].checked}/><font size="3"> Youth Small-Super Blue </font>
                 </td>
 
                 </tr>
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 2)} defaultChecked={this.state.shirt_sizes[2].checked}/><font size="3">  Youth Small-Tennessee Orange </font>
-                </td>
-
-                </tr>
-
-                <tr>
-                <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 3)} defaultChecked={this.state.shirt_sizes[3].checked}/><font size="3">  Youth Medium-Super Blue </font>
-                </td>
-
-                </tr>
-                <tr>
-                <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 4)} defaultChecked={this.state.shirt_sizes[4].checked}/><font size="3">  Youth Large-Tennessee Orange </font>
-                </td>
-
-                </tr>
-                <tr>
-                <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 5)} defaultChecked={this.state.shirt_sizes[5].checked}/><font size="3"> Youth Large-Super Blue </font>
+                <input type="radio" onChange={this.handleCheck.bind(this, 2,'Youth Small-Tennessee Orange')} defaultChecked={this.state.shirt_sizes[2].checked}/><font size="3">  Youth Small-Tennessee Orange </font>
                 </td>
 
                 </tr>
 
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 6)} defaultChecked={this.state.shirt_sizes[6].checked}/><font size="3">Youth Extra Large-Tennessee Orange</font>
+                <input type="radio" onChange={this.handleCheck.bind(this, 3,'Youth Medium-Super Blue')} defaultChecked={this.state.shirt_sizes[3].checked}/><font size="3">  Youth Medium-Super Blue </font>
                 </td>
 
                 </tr>
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 7)} defaultChecked={this.state.shirt_sizes[7].checked}/><font size="3"> Youth Extra Large-Super Blue </font>
+                <input type="radio" onChange={this.handleCheck.bind(this, 4,'Youth Large-Tennessee Orange')} defaultChecked={this.state.shirt_sizes[4].checked}/><font size="3">  Youth Large-Tennessee Orange </font>
                 </td>
 
                 </tr>
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 8)} defaultChecked={this.state.shirt_sizes[8].checked}/><font size="3"> Small-Tennessee Orange </font>
-                </td>
-
-                </tr>
-
-                <tr>
-                <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 9)} defaultChecked={this.state.shirt_sizes[9].checked}/><font size="3"> Small-Super Blue </font>
+                <input type="radio" onChange={this.handleCheck.bind(this, 5,'Youth Large-Super Blue ')} defaultChecked={this.state.shirt_sizes[5].checked}/><font size="3"> Youth Large-Super Blue </font>
                 </td>
 
                 </tr>
 
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 10)} defaultChecked={this.state.shirt_sizes[10].checked} /><font size="3"> Medium-Tennessee Orange</font>
+                <input type="radio" onChange={this.handleCheck.bind(this, 6,'Youth Extra Large-Tennessee Orange')} defaultChecked={this.state.shirt_sizes[6].checked}/><font size="3">Youth Extra Large-Tennessee Orange</font>
+                </td>
+
+                </tr>
+                <tr>
+                <td align="left">
+                <input type="radio" onChange={this.handleCheck.bind(this, 7,'Youth Extra Large-Super Blu')} defaultChecked={this.state.shirt_sizes[7].checked}/><font size="3"> Youth Extra Large-Super Blue </font>
+                </td>
+
+                </tr>
+                <tr>
+                <td align="left">
+                <input type="radio" onChange={this.handleCheck.bind(this, 8,'Small-Tennessee Orange')} defaultChecked={this.state.shirt_sizes[8].checked}/><font size="3"> Small-Tennessee Orange </font>
                 </td>
 
                 </tr>
 
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 11)} defaultChecked={this.state.shirt_sizes[11].checked} /><font size="3">Medium-Super Blue </font>
+                <input type="radio" onChange={this.handleCheck.bind(this, 9,'Small-Super Blue')} defaultChecked={this.state.shirt_sizes[9].checked}/><font size="3"> Small-Super Blue </font>
                 </td>
 
                 </tr>
 
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 12)} defaultChecked={this.state.shirt_sizes[12].checked} /><font size="3">Large-Tennessee Orange </font>
-                </td>
-
-                </tr>
-                <tr>
-                <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 13)} defaultChecked={this.state.shirt_sizes[13].checked} /><font size="3">Large-Super Blue </font>
-                </td>
-
-                </tr>
-                <tr>
-                <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 14)} defaultChecked={this.state.shirt_sizes[14].checked} /><font size="3">Extra Large-Tennessee Orange </font>
-
+                <input type="radio" onChange={this.handleCheck.bind(this, 10,'Medium-Tennessee Orange')} defaultChecked={this.state.shirt_sizes[10].checked} /><font size="3"> Medium-Tennessee Orange</font>
                 </td>
 
                 </tr>
 
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 15)} defaultChecked={this.state.shirt_sizes[15].checked} /><font size="3">Extra Large-Super Blue </font>
+                <input type="radio" onChange={this.handleCheck.bind(this, 11,'Medium-Super Blue')} defaultChecked={this.state.shirt_sizes[11].checked} /><font size="3">Medium-Super Blue </font>
+                </td>
+
+                </tr>
+
+                <tr>
+                <td align="left">
+                <input type="radio" onChange={this.handleCheck.bind(this, 12,'Large-Tennessee Orange')} defaultChecked={this.state.shirt_sizes[12].checked} /><font size="3">Large-Tennessee Orange </font>
+                </td>
+
+                </tr>
+                <tr>
+                <td align="left">
+                <input type="radio" onChange={this.handleCheck.bind(this, 13,'Large-Super Blue')} defaultChecked={this.state.shirt_sizes[13].checked} /><font size="3">Large-Super Blue </font>
+                </td>
+
+                </tr>
+                <tr>
+                <td align="left">
+                <input type="radio" onChange={this.handleCheck.bind(this, 14,'Extra Large-Tennessee Orange')} defaultChecked={this.state.shirt_sizes[14].checked} /><font size="3">Extra Large-Tennessee Orange </font>
+
+                </td>
+
+                </tr>
+
+                <tr>
+                <td align="left">
+                <input type="radio" onChange={this.handleCheck.bind(this, 15,'Extra Large-Super Blue')} defaultChecked={this.state.shirt_sizes[15].checked} /><font size="3">Extra Large-Super Blue </font>
 
                 </td>
 
                 </tr>
                 <tr>
                 <td align="left">
-                <input type="checkbox" onChange={this.handleCheck.bind(this, 16)} defaultChecked={this.state.shirt_sizes[16].checked} /><font size="3">Other</font>
+                <input type="radio" onChange={this.handleCheck.bind(this, 16,'other')} defaultChecked={this.state.shirt_sizes[16].checked} /><font size="3">Other</font>
 
                 </td>
 

@@ -20,7 +20,8 @@ class Judgeregister extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 	 this.state = {
           show:false,
-		  show_error:false
+		  show_error:false,
+		  message:''
 		  
           
         };
@@ -53,11 +54,27 @@ class Judgeregister extends React.Component {
 
         }
         else {
-			 this.setState({show_error:true});
+			// alert(res.message);
+			 this.setState({show_error:true,message:res.message});
          
           return false;
         }
-   })  
+   })
+   .then(data =>{
+	       // alert(data);
+		  if(data.status==true)
+		  {
+			    
+			  var user_id=data._id;
+			   window.location.replace('http://localhost:3000/judgedashboard');
+		  }
+		  else
+		  {
+			   
+			   this.setState({show_error:true});
+			// alert('Invalid Login Detail');  
+		  }
+	  })   
    .catch((error) => {
 
    });
@@ -80,7 +97,7 @@ class Judgeregister extends React.Component {
 	      className="red-bg"
         show={this.state.show_error}
         title="Error"
-        text="Something Went Wrong"
+        text={this.state.message}   
         onConfirm={() => this.setState({ show_error: false })}
       />
       <form onSubmit={this.handleSubmit}>
@@ -96,20 +113,20 @@ class Judgeregister extends React.Component {
                                   
                                      >
                                     <option value="-1" selected>select category 1</option>
-                                    <option value="100 Behavioral & Social Sciences">Behavioral & Social Sciences</option>
-                                    <option value="200 Biochemistry">Biochemistry</option>
-                                    <option value="300 Inorganic Chemistry">Inorganic Chemistry</option>
-                                    <option value="400 Organic Chemistry">Organic Chemistry</option>
-                                    <option value="500 Earth & Environmental Sciences">Earth & Environmental Sciences</option>
-                                    <option value="700 Medicine & Health">Medicine & Health</option>
-                                    <option value="800 Animal Science">Animal Science</option>
-                                    <option value="900 Microbiology">Microbiology</option>
-                                    <option value="1000 Animal Science">Animal Science</option>
-                                    <option value="1100 Physics and Astronomy">Physics and Astronomy</option>
-                                    <option value="1200 Engineering">Engineering</option>
-                                    <option value="1300 Computer Science and Math">Computer Science and Math</option>
-                                    <option value="1400 Robotics">Robotics</option>
-                                    <option value="1500 Team Project">Team Project</option>
+                                    <option value="100">Behavioral & Social Sciences</option>
+                                    <option value="200">Biochemistry</option>
+                                    <option value="300">Inorganic Chemistry</option>
+                                    <option value="400">Organic Chemistry</option>
+                                    <option value="500">Earth & Environmental Sciences</option>
+                                    <option value="700">Medicine & Health</option>
+                                    <option value="800">Animal Science</option>
+                                    <option value="900">Microbiology</option>
+                                    <option value="1000">Animal Science</option>
+                                    <option value="1100">Physics and Astronomy</option>
+                                    <option value="1200">Engineering</option>
+                                    <option value="1300">Computer Science and Math</option>
+                                    <option value="1400">Robotics</option>
+                                    <option value="1500">Team Project</option>
                                         </select>
 		  </b></td></tr>
           <tr><td><b>Category::</b></td><td><b>	<select
@@ -119,21 +136,21 @@ class Judgeregister extends React.Component {
                                     required
                                    
                                      >
-                                   <option value="-1" selected>select category 2</option>
-                                    <option value="100 Behavioral & Social Sciences">Behavioral & Social Sciences</option>
-                                    <option value="200 Biochemistry">Biochemistry</option>
-                                    <option value="300 Inorganic Chemistry">Inorganic Chemistry</option>
-                                    <option value="400 Organic Chemistry">Organic Chemistry</option>
-                                    <option value="500 Earth & Environmental Sciences">Earth & Environmental Sciences</option>
-                                    <option value="700 Medicine & Health">Medicine & Health</option>
-                                    <option value="800 Animal Science">Animal Science</option>
-                                    <option value="900 Microbiology">Microbiology</option>
-                                    <option value="1000 Animal Science">Animal Science</option>
-                                    <option value="1100 Physics and Astronomy">Physics and Astronomy</option>
-                                    <option value="1200 Engineering">Engineering</option>
-                                    <option value="1300 Computer Science and Math">Computer Science and Math</option>
-                                    <option value="1400 Robotics">Robotics</option>
-                                    <option value="1500 Team Project">Team Project</option>
+                                    <option value="-1" selected>select category 1</option>
+                                    <option value="100">Behavioral & Social Sciences</option>
+                                    <option value="200">Biochemistry</option>
+                                    <option value="300">Inorganic Chemistry</option>
+                                    <option value="400">Organic Chemistry</option>
+                                    <option value="500">Earth & Environmental Sciences</option>
+                                    <option value="700">Medicine & Health</option>
+                                    <option value="800">Animal Science</option>
+                                    <option value="900">Microbiology</option>
+                                    <option value="1000">Animal Science</option>
+                                    <option value="1100">Physics and Astronomy</option>
+                                    <option value="1200">Engineering</option>
+                                    <option value="1300">Computer Science and Math</option>
+                                    <option value="1400">Robotics</option>
+                                    <option value="1500">Team Project</option>
                                         </select></b></td></tr>
           <tr><td><b>Category:</b></td><td><b>	<select
                                     name="category_3"
@@ -142,21 +159,21 @@ class Judgeregister extends React.Component {
                                     required
                                   
                                      >
-                                  <option value="-1" selected>select category 3</option>
-                                    <option value="100 Behavioral & Social Sciences">Behavioral & Social Sciences</option>
-                                    <option value="200 Biochemistry">Biochemistry</option>
-                                    <option value="300 Inorganic Chemistry">Inorganic Chemistry</option>
-                                    <option value="400 Organic Chemistry">Organic Chemistry</option>
-                                    <option value="500 Earth & Environmental Sciences">Earth & Environmental Sciences</option>
-                                    <option value="700 Medicine & Health">Medicine & Health</option>
-                                    <option value="800 Animal Science">Animal Science</option>
-                                    <option value="900 Microbiology">Microbiology</option>
-                                    <option value="1000 Animal Science">Animal Science</option>
-                                    <option value="1100 Physics and Astronomy">Physics and Astronomy</option>
-                                    <option value="1200 Engineering">Engineering</option>
-                                    <option value="1300 Computer Science and Math">Computer Science and Math</option>
-                                    <option value="1400 Robotics">Robotics</option>
-                                    <option value="1500 Team Project">Team Project</option>
+                                   <option value="-1" selected>select category 1</option>
+                                    <option value="100">Behavioral & Social Sciences</option>
+                                    <option value="200">Biochemistry</option>
+                                    <option value="300">Inorganic Chemistry</option>
+                                    <option value="400">Organic Chemistry</option>
+                                    <option value="500">Earth & Environmental Sciences</option>
+                                    <option value="700">Medicine & Health</option>
+                                    <option value="800">Animal Science</option>
+                                    <option value="900">Microbiology</option>
+                                    <option value="1000">Animal Science</option>
+                                    <option value="1100">Physics and Astronomy</option>
+                                    <option value="1200">Engineering</option>
+                                    <option value="1300">Computer Science and Math</option>
+                                    <option value="1400">Robotics</option>
+                                    <option value="1500">Team Project</option>
                                         </select></b></td></tr>
           <tr><td><b>Category:</b></td><td><b>
 		  	<select
@@ -166,21 +183,21 @@ class Judgeregister extends React.Component {
                                     
                                     
                                      >
-                                    <option value="-1" selected>select category 4</option>
-                                    <option value="100 Behavioral & Social Sciences">Behavioral & Social Sciences</option>
-                                    <option value="200 Biochemistry">Biochemistry</option>
-                                    <option value="300 Inorganic Chemistry">Inorganic Chemistry</option>
-                                    <option value="400 Organic Chemistry">Organic Chemistry</option>
-                                    <option value="500 Earth & Environmental Sciences">Earth & Environmental Sciences</option>
-                                    <option value="700 Medicine & Health">Medicine & Health</option>
-                                    <option value="800 Animal Science">Animal Science</option>
-                                    <option value="900 Microbiology">Microbiology</option>
-                                    <option value="1000 Animal Science">Animal Science</option>
-                                    <option value="1100 Physics and Astronomy">Physics and Astronomy</option>
-                                    <option value="1200 Engineering">Engineering</option>
-                                    <option value="1300 Computer Science and Math">Computer Science and Math</option>
-                                    <option value="1400 Robotics">Robotics</option>
-                                    <option value="1500 Team Project">Team Project</option>
+                                    <option value="-1" selected>select category 1</option>
+                                    <option value="100">Behavioral & Social Sciences</option>
+                                    <option value="200">Biochemistry</option>
+                                    <option value="300">Inorganic Chemistry</option>
+                                    <option value="400">Organic Chemistry</option>
+                                    <option value="500">Earth & Environmental Sciences</option>
+                                    <option value="700">Medicine & Health</option>
+                                    <option value="800">Animal Science</option>
+                                    <option value="900">Microbiology</option>
+                                    <option value="1000">Animal Science</option>
+                                    <option value="1100">Physics and Astronomy</option>
+                                    <option value="1200">Engineering</option>
+                                    <option value="1300">Computer Science and Math</option>
+                                    <option value="1400">Robotics</option>
+                                    <option value="1500">Team Project</option>
                                         </select></b></td></tr>
           <tr><td><b>Email:</b></td><td><b><input type="email"  required name="login_email" className="form-control custominput" /></b></td></tr>
           <tr><td><b>Password:</b></td><td><b><input type="password"  required name="password"   className="form-control custominput" /></b></td></tr>

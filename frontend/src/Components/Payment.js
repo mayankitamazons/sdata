@@ -125,9 +125,9 @@ class Payment extends React.Component
 			<input name="sc_name1" type="hidden" value={this.props.getStore().sc_name1}/>
 			<input name="sc_name2" type="hidden" value={this.props.getStore().sc_name2}/>
 			<input name="s_phone" type="hidden" value={this.props.getStore().s_phone}/>
-			<input name="s1_tshirt" type="hidden" value={this.props.getStore().s1_tshirt}/>
-			<input name="s2_tshirt" type="hidden" value={this.props.getStore().s2_tshirt}/>
-			<input name="s3_tshirt" type="hidden" value={this.props.getStore().s3_tshirt}/>
+			<input name="shirt_sizes_1" type="hidden" value={this.props.getStore().size_data_1}/>
+			<input name="shirt_sizes_2" type="hidden" value={this.props.getStore().size_data_2}/>
+			<input name="shirt_sizes_3" type="hidden" value={this.props.getStore().size_data_3}/>
 			<input name="summary" type="hidden" value={this.props.getStore().summary}/>
 			<input name="summary_doc" type="hidden" value={this.props.getStore().summary_doc}/>
 			<input name="form_doc" type="hidden" value={this.props.getStore().form_doc}/>

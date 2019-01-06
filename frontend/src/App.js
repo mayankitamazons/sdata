@@ -10,6 +10,7 @@ import typeoffair from './Components/Typeoffair';
 import u_sform from './Components/U_sform';
 import demo from './Components/demo';
 import judgeregister from './Components/judgeregister';
+import judgeforgot from './Components/judgeforgot';
 import judgedashboard from './Components/judgedashboard';
 import registeruser from './Components/registeruser';
 import back from './Images/back.jpg';
@@ -173,7 +174,9 @@ class App extends Component {
 			  <div className="row">
              <div className="form-group col-md-6">
 			  
-				  <Link to={'/judgeregister'} onClick={this.toggle}>   Don't have account Register</Link>    
+				  <Link to={'/judgeregister'} onClick={this.toggle}>   Don't have account Register</Link>
+					<br/>
+				  <Link to={'/judgeforgot'} onClick={this.toggle}>Forgot Password ??</Link>    
                 
              
 			  
@@ -193,6 +196,7 @@ class App extends Component {
         <Route path = {'/uform'} component={u_sform}/>
         <Route path = {'/demo'} component={demo}/>   
         <Route path = {'/judgeregister'} component={judgeregister}/>   
+        <Route path = {'/judgeforgot'} component={judgeforgot}/>   
         <Route path = {'/judgedashboard'} component={judgedashboard}/>   
         <Route path = {'/registeruser'} component={registeruser}/>   
         

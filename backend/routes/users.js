@@ -274,5 +274,77 @@ router.post('/judgeregister',upload.fields([{
 			 }
 			 });
 		 });
+	// email check 
+	router.get('/emailcheck',upload.fields([{
+           name: 'summery', maxCount: 1
+         }, {
+           name: 'form', maxCount: 1
+         }]),function(req,res,next){
+			 var user_email=req.query.email;
+			 if(req.body)
+			 {
+				 User.findOne({email:user_email}).sort({user_id:-1}).then(function(userdata){
+					 if(userdata)
+					 {
+						res.send({"status":true,"code":200,"message":"Email Address is already used","s_code":201});
+					 }
+					  else
+					 {
+						 res.send({"status":true,"code":200,"message":"Email Not used","s_code":200});
+					 }
+				 }); 
+			 }
+			 else
+			 {
+				res.send({"status":false,"code":404,"message":"No User Register Yet"}); 
+			 }
+			
+		 });   
+	router.post('/judgeforgot',upload.fields([{
+           name: 'summery', maxCount: 1
+         }, {
+           name: 'form', maxCount: 1
+         }]),function(req,res,next){
+			 if(req.body)
+			 {
+				 var login_email=req.body.email;
+				 Judge.findOne({login_email:login_email}).then(function(tdata){
+					 if(tdata)
+					 {
+						 var nodemailer = require('nodemailer');
+							var transporter = nodemailer.createTransport({
+										  service: 'gmail',
+										  auth: {
+											user: 'click4mayank@gmail.com',
+											pass: 'MayankDev@12'
+										  }
+										});
+						 let mailOptions = {
+								 from: 'click4mayank@gmail.com', // sender address
+								to:login_email, // list of receivers
+								subject: 'Registration Mail', // Subject line
+								//text: 'Hello world?', // plain text body
+								html: '<div>HI,</br><p>Account detail is as below:  Email :'+login_email+' Password :'+tdata.password+'</p></div>' // html body
+							};
+							 transporter.sendMail(mailOptions, function(error, info){
+													  if (error) {
+														console.log(error);
+													  } else {
+														console.log('Email sent: ' + info.response);
+												  }
+												}); 
+						 res.send({"status":true,"code":200,"message":"Detail are shared over email"}); 
+					 }
+					 else
+					 {
+						 res.send({"status":false,"code":404,"message":"Email id not found"}); 
+					 }
+				 });
+			 }
+			 else
+			 {
+				 res.send({"status":false,"code":404,"message":"Required Parameter missing"}); 
+			 }
+		 });
 
 module.exports=router;

@@ -211,20 +211,20 @@ class student_details extends React.Component
                                     defaultValue={this.state.category}
                                     onBlur={this.validationCheck}>
                                     <option value="-1" selected>select..</option>
-                                    <option value="100 Behavioral & Social Sciences">Behavioral & Social Sciences</option>
-                                    <option value="200 Biochemistry">Biochemistry</option>
-                                    <option value="300 Inorganic Chemistry">Inorganic Chemistry</option>
-                                    <option value="400 Organic Chemistry">Organic Chemistry</option>
-                                    <option value="500 Earth & Environmental Sciences">Earth & Environmental Sciences</option>
-                                    <option value="700 Medicine & Health">Medicine & Health</option>
-                                    <option value="800 Animal Science">Animal Science</option>
-                                    <option value="900 Microbiology">Microbiology</option>
-                                    <option value="1000 Animal Science">Animal Science</option>
-                                    <option value="1100 Physics and Astronomy">Physics and Astronomy</option>
-                                    <option value="1200 Engineering">Engineering</option>
-                                    <option value="1300 Computer Science and Math">Computer Science and Math</option>
-                                    <option value="1400 Robotics">Robotics</option>
-                                    <option value="1500 Team Project">Team Project</option>
+                                    <option value="100">Behavioral & Social Sciences</option>
+                                    <option value="200">Biochemistry</option>
+                                    <option value="300">Inorganic Chemistry</option>
+                                    <option value="400">Organic Chemistry</option>
+                                    <option value="500">Earth & Environmental Sciences</option>
+                                    <option value="700">Medicine & Health</option>
+                                    <option value="800">Animal Science</option>
+                                    <option value="900">Microbiology</option>
+                                    <option value="1000">Animal Science</option>
+                                    <option value="1100">Physics and Astronomy</option>
+                                    <option value="1200">Engineering</option>
+                                    <option value="1300">Computer Science and Math</option>
+                                    <option value="1400">Robotics</option>
+                                    <option value="1500">Team Project</option>
                                         </select>
                                 <div>{this.state.categoryValMsg}</div>
                             </div>

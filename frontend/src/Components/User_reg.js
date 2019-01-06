@@ -10,6 +10,7 @@ class user_reg extends React.Component
           email: props.getStore().email,
           teamname: props.getStore().teamname,
           password: props.getStore().password,
+		  email_vali:'',
         };
     
         this._validateOnDemand = true; // this flag enables onBlur validation as user fills forms
@@ -17,24 +18,63 @@ class user_reg extends React.Component
         this.validationCheck = this.validationCheck.bind(this);
         this.isValidated = this.isValidated.bind(this);
     }
-
+    
     isValidated() {
         const userInput = this._grabUserInput(); // grab user entered vals
         const validateNewInput = this._validateData(userInput); // run the new input against the validator
-        let isDataValid = false;
+        let isDataValid =  this.isValidated.bind(this);
     
         // if full validation passes then save to store and pass as valid
         if (Object.keys(validateNewInput).every((k) => { return validateNewInput[k] === true })) {
             if (userInput.password.length >= 8 && userInput.password.length <= 12) {
                 if (this.props.getStore().email != userInput.email || this.props.getStore().password != userInput.password || this.props.getStore().teamname != userInput.teamname) { // only update store of something changed
-                    this.props.updateStore({
+                         var user_email= userInput.email;
+						 var u_url='http://localhost:4000/api/user/emailcheck?email='+user_email;
+				
+    fetch(u_url, {
+   method: 'GET',
+        headers: {
+            "Content-Type": "application/json; charset=UTF-8"
+        }
+	})
+   .then((response) => response.json())
+   .then((res) => {
+        if(res.code==200){
+				//alert(res.message);
+				var s_code=res.s_code;
+				if(s_code==201)
+				{
+					alert('Email Address is already Register');
+					 window.location.reload();
+					  this.setState(Object.assign(userInput, validateNewInput,"Email Address is already used"));
+				}
+				else
+				{
+					this.props.updateStore({
                     ...userInput,
                     savedToCloud: false // use this to notify step4 that some changes took place and prompt the user to save again
                     });  // Update store here (this is just an example, in reality you will do it via redux or flux)
-                }
+				}
+				
+            // this.setState({data:res.data});
 
-                isDataValid = true;
+        }
+        else {
+          console.log('something went wrong ');
+          return false;
+        }
+   })  
+   .catch((error) => {
+
+   });
+  
+ 
+					
+                }
+    
+               
             }
+			isDataValid=true;
         }
         else {
             // if anything fails then update the UI validation state but NOT the UI Data State
@@ -45,6 +85,7 @@ class user_reg extends React.Component
       }
     
       validationCheck() {
+		
         if (!this._validateOnDemand)
           return;
     
@@ -88,10 +129,11 @@ class user_reg extends React.Component
       }
 
     render()
-    {        
+    { 
+       
         return(
             <div>
-                <h1 align="center" ><b>User Registration</b></h1>
+                <h1 align="center" ><b>Team Registration</b></h1>
 
                 <table cellpadding="2" width="50%" border="10" cellspacing="4" align="center">
                     <tr></tr>
@@ -143,7 +185,9 @@ class user_reg extends React.Component
                                     className="form-control"
                                     required
                                     defaultValue={this.state.email}
-                                    onBlur={this.validationCheck} />
+                                    onBlur={this.validationCheck}
+									
+									/>
                                 <div>{this.state.emailValMsg}</div>
                             </div>
                         </td>

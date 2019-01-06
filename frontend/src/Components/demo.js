@@ -1,68 +1,124 @@
 import React from 'react';
 
-const inputParsers = {
-  date(input) {
-    const [month, day, year] = input.split('/');
-    return `${year}-${month}-${day}`;
-  },
-  uppercase(input) {
-    return input.toUpperCase();
-  },
-  number(input) {
-    return parseFloat(input);
-  },
-};
 
-class Demo extends React.Component {
-  constructor() {
-    super();
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const form = event.target;
-    const data = new FormData(form);
-    // for (let name of data.keys()) {
-      // const input = form.elements[name];
-      // const parserName = input.dataset.parse;
-
-      // if (parserName) {
-        // const parser = inputParsers[parserName];
-        // const parsedValue = parser(data.get(name));
-        // data.set(name, parsedValue);
-      // }
-    // }
+class shirt_size2 extends React.Component
+{
+    constructor(props) {
+        super(props);
     
-    fetch('http://localhost:4000/api/user/register', {
-      method: 'POST',
-      body: data,
-    }).then(function(body) {
-           alert("saved successfully!!");
+        this.state = {
+            shirt_sizes: '',
+			size_data:''
+        };
+
+        this._validateOnDemand = true; // this flag enables onBlur validation as user fills forms
+    
+        this.validationCheck = this.validationCheck.bind(this);
+        this.isValidated = this.isValidated.bind(this);
+    }
+
+    handleCheck(index,value) {
+		alert(value);
+        // this.state.shirt_sizes[index].checked = !this.state.shirt_sizes[index].checked;
+        this.state.size_data = value;
+    }
+
+    isValidated() {
+        let isDataValid = false;
+
+        for (var i = 0; i < 17; i ++) {
+            if (this.state.shirt_sizes[i].checked) {
+                isDataValid = true;
+                break;
+            }   
+        }
+
+        const userInput = {shirt_sizes_2: this.state.shirt_sizes};
+
+        this.props.updateStore({
+            ...userInput,
+            savedToCloud: false // use this to notify step4 that some changes took place and prompt the user to save again
         });
-  }
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          name="teamname"
-          type="text"
-          data-parse="uppercase"
-        />
+        const validateNewInput = this._validateData(userInput); // run the new input against the validator
+        
+        if (!isDataValid)
+            this.setState(Object.assign(userInput, validateNewInput, this._validationErrors(validateNewInput)));
+    
+        return isDataValid;
+    }
 
-        <input name="email" type="email" />
+    validationCheck() {
+        if (!this._validateOnDemand)
+          return;
+    
+        const userInput = {shirt_sizes_2: this.state.shirt_sizes,size_data:this.state.size_data}; // grab user entered vals
+		console.log(userInput);
+        const validateNewInput = this._validateData(userInput); // run the new input against the validator
+    
+        this.setState(Object.assign(userInput, validateNewInput, this._validationErrors(validateNewInput)));
+    }
 
-        <input
-          name="birthdate"
-          type="text"
-          data-parse="date"
-        />
+    _validationErrors(val) {
+        const errMsgs = {
+          sizeMsg: val.shirt_sizeVal ? '' : 'At least 1 check'
+        }
+        return errMsgs;
+    }
 
-        <button>Send data!</button>
-      </form>
-    );
-  }
+    _validateData(data) {
+        let flag = false;
+
+        for (var i = 0; i < 17; i ++) {
+            if (data.shirt_sizes_2[i].checked) {
+                flag = true;
+                break;
+            }   
+        }
+        return  {
+            shirt_sizeVal: flag
+        }
+    }
+    
+    render()
+    {
+        return(
+            <div>
+                <h1 align="center"> Please indicate the shirt size if you are preordering a t-shirt  for Student2</h1>
+                    <table cellpadding="1" width="20%" cellspacing="2" align="center">
+                    <tr>
+                        <td align="left">
+                            <div>{this.state.sizeMsg}</div>
+                        </td>
+                    </tr>
+                <tr>
+                <td align="left">
+                <input type="radio" name="size_1" onChange={this.handleCheck.bind(this, 0,'Youth Small-Tennessee Orange')} /><font size="3">  Youth Small-Tennessee Orange </font>
+                </td>
+
+                </tr>
+                <tr>
+                <td align="left">
+                <input type="radio" name="size_1" onChange={this.handleCheck.bind(this, 1,'Youth Small-Super Blue')}/><font size="3"> Youth Small-Super Blue </font>
+                </td>
+
+                </tr>
+                <tr>
+                <td align="left">
+                <input type="radio" name="size_1" onChange={this.handleCheck.bind(this, 2,'Youth Small-Tennessee Orange')} /><font size="3">  Youth Small-Tennessee Orange </font>
+                </td>
+
+                </tr>
+
+             
+                    <tr>
+                <td colspan="1" align="left"><input type="text" name="ifnotanyfromabove"
+                id="ifnotanyfromabove" size="30"/></td>
+                </tr>
+                </table>
+            </div>
+        );
+
+    }
 }
-
-export default Demo;
+export default shirt_size2;
